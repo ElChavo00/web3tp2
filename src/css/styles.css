@@ -1,0 +1,100 @@
+/* src/css/styles.css */
+
+body {
+  background-color: black;
+  color: white;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden; /* Empêche le scroll */
+  margin: 0;
+  font-family: "Courier New", Courier, monospace;
+}
+
+/* Grille Principale */
+.grid-container {
+  height: 100vh; /* Force la hauteur totale de l'écran */
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Gestion des hauteurs de lignes (Crucial pour le fix) */
+.h-top {
+  height: 15%;
+  min-height: 80px;
+}
+.h-mid {
+  height: 55%;
+  /* C'est ici que la Terre vit, elle a besoin d'espace */
+}
+.h-bot {
+  height: 30%;
+  min-height: 150px;
+}
+
+/* Cellules */
+.cell {
+  border: 1px solid rgba(255, 255, 255, 0.3); /* Bordure plus subtile */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 10px;
+  position: relative;
+  overflow: hidden; /* Important pour ne pas déborder */
+}
+
+/* --- FIX THREE.JS (TERRE) --- */
+#earth-container {
+  position: absolute; /* Prend toute la place de la cellule */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+/* --- FIX CHART.JS --- */
+/* On crée un conteneur pour le canvas pour qu'il respecte la taille */
+.chart-container {
+  position: relative;
+  width: 90%;
+  height: 60%; /* Hauteur forcée pour le graphique */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+canvas {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* Typographie */
+h4 {
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+}
+
+h6 {
+  font-weight: bold;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  z-index: 2; /* Pour passer au dessus de la 3D si besoin */
+}
+
+/* Bouton */
+.btn-danger-custom {
+  background-color: darkred;
+  border: 1px solid red;
+  color: white;
+  padding: 10px 30px;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  font-weight: bold;
+  cursor: pointer;
+}

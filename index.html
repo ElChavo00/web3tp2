@@ -1,35 +1,109 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Exercice NPM</title>
-
-    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
-
-    <link rel="stylesheet" href="./node_modules/bootstrap-icons/font/bootstrap-icons.css">
-
-    <script type="importmap">
-    {
-        "imports": {
-            "animejs": "./node_modules/animejs/lib/anime.es.js",
-            "chart.js": "./node_modules/chart.js/dist/chart.js"
-        }
-    }
-    </script>
+    <title>Destroy Earth Dashboard</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    
+    <link rel="stylesheet" href="./src/css/styles.css">
 </head>
 <body>
-    
-    <main class="container mt-5">
-        <h1>Projet NPM</h1>
-        </main>
 
-    <script src="./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <div class="container-fluid p-0 grid-container">
+        
+        <div class="row g-0 h-top">
+            <div class="col-3 cell">
+                <h6><i class="bi bi-stars"></i> FANCY</h6>
+            </div>
+            <div class="col-6 cell" id="main-title">
+                <h4>DESTROY EARTH</h4>
+            </div>
+            <div class="col-3 cell">
+                <h6>FANCY <i class="bi bi-stars"></i></h6>
+            </div>
+        </div>
 
-    <script src="./src/js/bootstrap.js" defer></script>
+        <div class="row g-0 h-mid">
+            
+            <div class="col-3 d-flex flex-column p-0">
+                <div class="cell flex-grow-1">
+                    <h6>POPULATION <br>+ DIAGRAMME</h6>
+                    <div class="chart-container">
+                        <canvas id="chartPop"></canvas>
+                    </div>
+                </div>
+                <div class="cell flex-grow-1">
+                    <h6>METEO <br>+ DIAGRAMME</h6>
+                    <div class="chart-container">
+                        <canvas id="chartMeteo"></canvas>
+                    </div>
+                </div>
+            </div>
 
-    <script type="module" src="./src/js/animejs.js"></script>
-    <script type="module" src="./src/js/chartjs.js"></script>
+            <div class="col-6 cell p-0" style="position: relative;">
+                <div id="earth-container"></div>
+            </div>
+
+            <div class="col-3 d-flex flex-column p-0">
+                <div class="cell flex-grow-1">
+                    <h6>MAP <br>+ RANDOMISER</h6>
+                    <i class="bi bi-globe-americas display-4"></i>
+                </div>
+                <div class="cell flex-grow-1">
+                    <h6>MORT <br>+ DIAGRAMME</h6>
+                    <div class="chart-container">
+                        <canvas id="chartMort"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row g-0 h-bot">
+            <div class="col-3 cell">
+                <h6>POLLUTION <br>+ DIAGRAMME</h6>
+                <div class="chart-container">
+                    <canvas id="chartPollution"></canvas>
+                </div>
+            </div>
+
+            <div class="col-6 p-0 d-flex">
+                <div class="cell col-4">
+                    <h6>MAGIC BALL</h6>
+                    <i class="bi bi-circle fs-1"></i>
+                </div>
+                <div class="cell col-4">
+                    <h6>BOUTON</h6>
+                    <button class="btn btn-danger-custom" id="actionBtn">ACTIVER</button>
+                </div>
+                <div class="cell col-4">
+                    <h6>FUN FACT</h6>
+                    <p style="font-size: 0.7rem;">La Terre pèse environ 5.972 × 10^24 kg.</p>
+                </div>
+            </div>
+
+            <div class="col-3 cell">
+                <h6>MOTS SWITCH <br>PLUSIEURS LANGUES</h6>
+                <div class="btn-group btn-group-sm">
+                    <button class="btn btn-outline-light active">FR</button>
+                    <button class="btn btn-outline-light">EN</button>
+                    <button class="btn btn-outline-light">ES</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="./src/js/chartjs.js"></script>
+    <script src="./src/js/animejs.js"></script>
+    <script src="./src/js/three_earth.js"></script>
 
 </body>
 </html>
