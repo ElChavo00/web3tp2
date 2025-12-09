@@ -1,100 +1,191 @@
-/* src/css/styles.css */
-
 body {
-  background-color: black;
-  color: white;
-  height: 100vh;
-  width: 100vw;
-  overflow: hidden; /* Empêche le scroll */
-  margin: 0;
+  background-color: #000;
+  color: #fff;
   font-family: "Courier New", Courier, monospace;
-}
-
-/* Grille Principale */
-.grid-container {
-  height: 100vh; /* Force la hauteur totale de l'écran */
+  height: 100vh;
   width: 100vw;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
+  margin: 0;
 }
 
-/* Gestion des hauteurs de lignes (Crucial pour le fix) */
-.h-top {
-  height: 15%;
-  min-height: 80px;
-}
-.h-mid {
-  height: 55%;
-  /* C'est ici que la Terre vit, elle a besoin d'espace */
-}
-.h-bot {
-  height: 30%;
-  min-height: 150px;
+/* Grid (CSS) - Utilisation de Flexbox pour gérer la hauteur du tableau de board */
+.container-fluid {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
 }
 
-/* Cellules */
-.cell {
-  border: 1px solid rgba(255, 255, 255, 0.3); /* Bordure plus subtile */
+.grid-row {
+  border-bottom: 1px solid #fff;
+  flex-grow: 1;
+}
+.grid-row:last-child {
+  border-bottom: none;
+}
+
+/* Grid (CSS) - Alignement vertical et horizontal du contenu des cellules */
+.grid-col {
+  border-right: 1px solid #fff;
+  padding: 5px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
-  padding: 10px;
   position: relative;
-  overflow: hidden; /* Important pour ne pas déborder */
+  overflow: hidden;
+}
+.grid-col:last-child {
+  border-right: none;
 }
 
-/* --- FIX THREE.JS (TERRE) --- */
-#earth-container {
-  position: absolute; /* Prend toute la place de la cellule */
-  top: 0;
-  left: 0;
+.row-top {
+  height: 10%;
+  min-height: 50px;
+}
+.row-middle {
+  height: 60%;
+}
+.row-bottom {
+  height: 30%;
+  min-height: 150px;
+}
+
+.stacked-col {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 0;
+  border-right: 1px solid #fff;
+}
+.stacked-cell {
+  flex: 1;
+  border-bottom: 1px solid #fff;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+.stacked-cell:last-child {
+  border-bottom: none;
+}
+
+.textflow-container {
   width: 100%;
   height: 100%;
-  z-index: 1;
-}
-
-/* --- FIX CHART.JS --- */
-/* On crée un conteneur pour le canvas pour qu'il respecte la taille */
-.chart-container {
+  overflow: hidden;
+  white-space: nowrap;
   position: relative;
-  width: 90%;
-  height: 60%; /* Hauteur forcée pour le graphique */
+  background: #000;
   display: flex;
-  justify-content: center;
   align-items: center;
 }
 
-canvas {
-  width: 100% !important;
-  height: 100% !important;
+.textflow-text {
+  display: inline-block;
+  padding-left: 100%;
+  animation: scroll-left 10s linear infinite;
+  font-family: "Courier New", Courier, monospace;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #00ff00;
+  letter-spacing: 2px;
+  font-size: 0.8rem;
 }
 
-/* Typographie */
+@keyframes scroll-left {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+#earth-container {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  background: radial-gradient(circle at center, #111 0%, #000 70%);
+}
+
+#map-container {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #222;
+}
+
+.chart-container {
+  width: 90%;
+  height: 80%;
+  position: relative;
+}
+
 h4 {
-  font-size: 1.5rem;
-  text-transform: uppercase;
-  letter-spacing: 4px;
+  letter-spacing: 5px;
+  font-weight: bold;
+  margin: 0;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
 }
 
 h6 {
+  margin-bottom: 5px;
   font-weight: bold;
-  letter-spacing: 2px;
-  margin-bottom: 10px;
-  font-size: 0.8rem;
   text-transform: uppercase;
-  z-index: 2; /* Pour passer au dessus de la 3D si besoin */
+  font-size: 0.7rem;
+  z-index: 2;
+  letter-spacing: 2px;
+  color: #ccc;
 }
 
-/* Bouton */
-.btn-danger-custom {
-  background-color: darkred;
-  border: 1px solid red;
+.red-button {
+  background-color: #aa0000;
   color: white;
+  border: 1px solid #ff0000;
   padding: 10px 30px;
-  font-size: 1.2rem;
-  text-transform: uppercase;
   font-weight: bold;
+  text-transform: uppercase;
   cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 0 10px #aa0000;
+}
+.red-button:hover {
+  background-color: #ff0000;
+  box-shadow: 0 0 20px #ff0000;
+  transform: scale(1.05);
+}
+
+#funFactText {
+  font-size: 0.7rem;
+  max-width: 80%;
+  min-height: 3em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Grid (CSS) - Ajustement ZDog pour remplire la cellule */
+.magic-ball-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+#greetingText {
+  font-family: "Courier New", Courier, monospace;
+  letter-spacing: 3px;
+  text-shadow: 0 0 5px #00ff00;
+  font-weight: bold;
 }

@@ -1,56 +1,45 @@
-/* src/js/maplibre.js */
-
 const mapContainer = document.getElementById("map-container");
 
 if (mapContainer) {
-  // 1. Initialisation de la carte
+  // Carte géographique - Initialisation de la carte MapLibre
   const map = new maplibregl.Map({
     container: "map-container",
-    // Style sombre (Dark)
-    style:
-      "https://api.maptiler.com/maps/ch-swisstopo-lbm-dark/style.json?key=28Qpi7R8ZQvfaov4hYoX",
-    center: [2.3522, 48.8566], // Départ Paris
-    zoom: 2,
+    style: "https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json",
+    center: [2.35, 48.85],
+    zoom: 1,
     attributionControl: false,
-    interactive: false, // Désactive la souris pour éviter de casser l'animation auto
+    interactive: false,
   });
 
-  // 2. Fonction qui fait voyager la carte
-  function tourTheWorld() {
-    // Générer des coordonnées aléatoires
-    const lon = Math.random() * 360 - 180;
-    const lat = Math.random() * 120 - 60; // On évite les pôles extrêmes
+  const countries = [
+    { name: "Canada", lon: -106.3468, lat: 56.1304, zoom: 2.5 },
+    { name: "Venezuela", lon: -66.5897, lat: 6.4238, zoom: 4 },
+    { name: "Guatemala", lon: -90.2308, lat: 15.7835, zoom: 5 },
+    { name: "Espagne", lon: -3.7492, lat: 40.4637, zoom: 4.5 },
+    { name: "Japon", lon: 138.2529, lat: 36.2048, zoom: 4 },
+    { name: "Suisse", lon: 8.2275, lat: 46.8182, zoom: 6 },
+  ];
 
-    // Paramètres de vol
+  // Carte géographique - Animation de la caméra pour voyager entre les pays
+  function tourTheWorld() {
+    const randomCountry =
+      countries[Math.floor(Math.random() * countries.length)];
     map.flyTo({
-      center: [lon, lat],
-      zoom: Math.random() * (5 - 3) + 3, // Zoom varié entre 3 et 5
-      speed: 0.6, // Vitesse plus lente pour un effet "cinématique"
-      curve: 1.5, // Courbe du trajet
-      pitch: 40, // Inclinaison 3D pour faire plus joli
+      center: [randomCountry.lon, randomCountry.lat],
+      zoom: randomCountry.zoom,
+      speed: 0.6,
+      curve: 1.2,
+      pitch: 40,
       essential: true,
     });
 
-    // ⚠️ L'ASTUCE EST ICI :
-    // Quand le mouvement est fini ('moveend'), on attend 2sec et on recommence
     map.once("moveend", () => {
-      setTimeout(() => {
-        tourTheWorld(); // Appel récursif (boucle infinie)
-      }, 2000); // 2000ms = 2 secondes de pause sur le pays
+      setTimeout(tourTheWorld, 2500);
     });
   }
 
-  // 3. Démarrage automatique une fois la carte chargée
-  map.on("load", () => {
-    tourTheWorld();
-  });
-
-  // 4. Le bouton "JUMP" permet de forcer un saut immédiat sans attendre
-  const btn = document.getElementById("randomMapBtn");
-  if (btn) {
-    btn.addEventListener("click", () => {
-      // On relance la fonction immédiatement (ça annulera le mouvement en cours)
-      tourTheWorld();
-    });
-  }
+  map.on("load", tourTheWorld);
+  document
+    .getElementById("randomMapBtn")
+    ?.addEventListener("click", tourTheWorld);
 }
